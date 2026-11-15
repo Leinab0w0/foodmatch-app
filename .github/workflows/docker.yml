@@ -1,0 +1,35 @@
+# Cada vez que subes cambios a la rama main, GitHub construye la imagen de FoodMatch
+# y la guarda en GitHub Container Registry (gratis). Azure la descarga desde ahí.
+name: Construir imagen Docker
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  imagen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Nombre de la imagen en minúsculas
+        run: echo "IMAGEN=ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/foodmatch" >> "$GITHUB_ENV"
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ env.IMAGEN }}:latest
+            ${{ env.IMAGEN }}:${{ github.sha }}

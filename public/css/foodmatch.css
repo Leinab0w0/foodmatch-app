@@ -1,0 +1,191 @@
+/* =====================================================================
+   FoodMatch · diseño "Medianoche" (oscuro, vibrante, tipo app)
+   ===================================================================== */
+:root{
+  --bg:#0c0a1d; --bg2:#15122f; --panel:#1a1638; --card:rgba(255,255,255,.065); --card2:rgba(255,255,255,.11);
+  --ink:#f6f4ff; --sub:#a9a5c8; --line:rgba(255,255,255,.11);
+  --brand:#ff6b4a; --brand2:#ff9f43; --brand3:#ffd166; --violet:#8b6bff; --pink:#ff4f9a;
+  --grad:linear-gradient(135deg,#ff5a5f 0%,#ff8a3d 55%,#ffc145 100%);
+  --grad2:linear-gradient(135deg,#8b6bff 0%,#ff4f9a 100%);
+  --ok:#3ddc97; --warn:#ffb347; --danger:#ff6b6b; --me:#4c8dff;
+  --asian:#ff5a5f; --pizza:#ff9f43; --sushi:#3ddc97; --burger:#ffd166; --vegan:#7ddc5a;
+  --radius:18px; --tab-h:64px;
+}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{
+  margin:0; color:var(--ink); min-height:100vh;
+  font-family:'Plus Jakarta Sans','Segoe UI',system-ui,-apple-system,sans-serif;
+  background:
+    radial-gradient(900px 500px at 8% -5%, rgba(139,107,255,.35), transparent 60%),
+    radial-gradient(800px 500px at 100% 105%, rgba(255,90,95,.28), transparent 60%),
+    var(--bg);
+  background-attachment:fixed;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;color:inherit}
+::selection{background:rgba(255,138,61,.45)}
+
+/* ---------- Estructura ---------- */
+.app{max-width:430px;min-height:100vh;margin:0 auto;position:relative;overflow:hidden;background:transparent}
+.app.pad{padding:22px 18px 120px}
+.logo{font-weight:800;font-size:28px;letter-spacing:-.5px}
+.logo span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.rainbow{height:5px;border-radius:6px;background:var(--grad);margin-bottom:20px;box-shadow:0 0 18px rgba(255,138,61,.55)}
+.meta{color:var(--sub);font-size:12.5px;line-height:1.4}
+h1,.h1{font-size:24px;font-weight:800;letter-spacing:-.4px;margin:14px 0 4px}
+.h2{font-size:15px;font-weight:700;margin:26px 0 8px;display:flex;align-items:center;gap:8px}
+.volver{display:inline-flex;align-items:center;gap:6px;color:var(--sub);font-size:13px;font-weight:600}
+
+/* ---------- Formularios ---------- */
+.field{display:block;width:100%;background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:14px;
+  padding:13px 14px;font-size:15px;color:var(--ink);margin-top:10px;font-family:inherit;outline:0;transition:.15s}
+.field::placeholder{color:#7f7ba3}
+.field:focus{border-color:var(--brand2);box-shadow:0 0 0 3px rgba(255,159,67,.22);background:rgba(255,255,255,.1)}
+select.field{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--sub) 50%),linear-gradient(135deg,var(--sub) 50%,transparent 50%);
+  background-position:calc(100% - 20px) 54%,calc(100% - 14px) 54%;background-size:6px 6px;background-repeat:no-repeat}
+select.field option{background:#1a1638;color:var(--ink)}
+input[type=file].field{padding:10px;font-size:13px}
+input[type=date].field{color-scheme:dark}
+input[type=range]{width:100%;margin:10px 0 20px;accent-color:var(--brand2)}
+label.check{display:flex;align-items:center;gap:10px;font-size:14px;cursor:pointer}
+input[type=checkbox]{accent-color:var(--brand2);width:18px;height:18px}
+
+/* ---------- Botones ---------- */
+.btn{display:block;background:var(--grad);color:#fff;text-align:center;border-radius:14px;padding:14px;font-size:15px;
+  font-weight:700;margin-top:14px;border:0;cursor:pointer;min-height:46px;box-shadow:0 8px 22px rgba(255,106,74,.35);transition:.15s;font-family:inherit}
+.btn:active{transform:scale(.98)}
+.btn:hover{filter:brightness(1.07)}
+.btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line);box-shadow:none;backdrop-filter:blur(10px)}
+.btn.ghost:hover{background:var(--card2)}
+.btn.violet{background:var(--grad2);box-shadow:0 8px 22px rgba(139,107,255,.35)}
+.btn.small{display:inline-block;padding:8px 14px;font-size:13px;min-height:0;margin:0;border-radius:12px}
+.btn.danger{background:rgba(255,107,107,.14);color:var(--danger);box-shadow:none;border:1px solid rgba(255,107,107,.35)}
+.linkbtn{border:0;background:none;cursor:pointer;font-size:13px;font-weight:700;padding:6px}
+.linkbtn.rojo{color:var(--danger)} .linkbtn.ok{color:var(--ok)}
+
+/* ---------- Chips ---------- */
+.chip{display:inline-block;font-size:12.5px;font-weight:600;padding:6px 12px;border-radius:20px;color:#fff;margin:0 6px 6px 0}
+.chip.o{background:rgba(20,16,44,.78);color:var(--ink);border:1px solid var(--line);backdrop-filter:blur(10px)}
+.c-asian{background:var(--asian)}.c-pizza{background:var(--pizza)}.c-sushi{background:var(--sushi)}.c-burger{background:var(--burger)}.c-vegan{background:var(--vegan)}
+.chip-op{cursor:pointer;opacity:.45;display:inline-block;transition:.15s;color:#1a1020}
+.chip-op input{display:none}
+.chip-op:has(input:checked){opacity:1;box-shadow:0 0 0 2px #fff, 0 4px 14px rgba(0,0,0,.35);transform:translateY(-1px)}
+.etiqueta{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:12px;background:var(--card2);color:var(--ink);margin-left:6px;letter-spacing:.2px}
+.etiqueta.super{background:var(--grad);color:#fff}.etiqueta.admin{background:rgba(61,220,151,.18);color:var(--ok)}.etiqueta.dueno{background:rgba(139,107,255,.25);color:#c9bcff}
+
+/* ---------- Filas y tarjetas ---------- */
+.ok{color:var(--ok);font-weight:700}.warn{color:var(--warn);font-weight:700}
+.rowi{display:flex;align-items:center;gap:12px;padding:12px 14px;margin-bottom:8px;border-radius:16px;background:var(--card);
+  border:1px solid var(--line);font-size:14.5px;transition:.15s}
+a.rowi:active{transform:scale(.99);background:var(--card2)}
+.dot{width:11px;height:11px;border-radius:50%;flex:none;box-shadow:0 0 10px currentColor}
+.push{margin-left:auto}
+.tarjeta{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-top:12px;backdrop-filter:blur(8px)}
+.reco{margin-top:16px;padding:14px 16px;border-radius:16px;background:linear-gradient(135deg,rgba(61,220,151,.16),rgba(61,220,151,.05));
+  border:1px solid rgba(61,220,151,.35);font-size:14px;line-height:1.45}
+.reco.error{background:rgba(255,107,107,.12);border-color:rgba(255,107,107,.4);color:#ffb4b4}
+.reco.aviso{background:rgba(255,179,71,.12);border-color:rgba(255,179,71,.4);color:#ffd9a3}
+.vacio{text-align:center;padding:34px 10px;color:var(--sub);font-size:14px}
+.vacio .emoji{font-size:44px;display:block;margin-bottom:8px}
+
+/* ---------- Barra inferior flotante ---------- */
+.tab{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(12px + env(safe-area-inset-bottom));z-index:5;
+  width:calc(100% - 24px);max-width:404px;display:flex;justify-content:space-around;padding:8px 6px;
+  background:rgba(22,18,52,.82);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+  border:1px solid var(--line);border-radius:24px;box-shadow:0 10px 36px rgba(0,0,0,.55)}
+.tab a,.tab span{flex:1;text-align:center;font-size:11px;font-weight:600;color:var(--sub);padding:7px 4px;border-radius:16px;transition:.15s}
+.tab a b{display:block;font-size:19px;line-height:1.1;margin-bottom:2px;font-weight:400;filter:grayscale(.6) opacity(.8)}
+.tab a.on{color:#fff;background:var(--grad);box-shadow:0 6px 16px rgba(255,106,74,.4)}
+.tab a.on b{filter:none}
+.tab .punto{position:relative}
+.tab .punto i{position:absolute;top:3px;right:calc(50% - 20px);min-width:16px;height:16px;border-radius:8px;background:var(--pink);color:#fff;font-size:10px;font-style:normal;font-weight:800;display:grid;place-items:center;padding:0 4px}
+
+/* ---------- Mapa y buscador ---------- */
+.map{position:absolute;inset:0;background:#15122f;z-index:0;isolation:isolate} /* isolation: los paneles internos de Leaflet (z-index 400+) no tapan buscador, panel ni barra */
+.searchbar{position:absolute;top:calc(14px + env(safe-area-inset-top));left:14px;right:14px;z-index:3;background:rgba(22,18,52,.85);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid var(--line);border-radius:18px;padding:12px 16px;
+  font-size:14px;color:var(--sub);box-shadow:0 8px 26px rgba(0,0,0,.45);display:flex;gap:10px;align-items:center}
+.searchbar input{color:var(--ink)}
+.searchbar input::placeholder{color:#8c88b0}
+.searchbar b{color:var(--brand3);white-space:nowrap}
+.chips{position:absolute;top:calc(72px + env(safe-area-inset-top));left:14px;right:14px;z-index:3;display:flex;gap:0;flex-wrap:wrap;pointer-events:none}
+.chips .chip{pointer-events:auto}
+.sheet{background:rgba(21,18,47,.93);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-top:1px solid var(--line);
+  border-radius:28px 28px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.55)}
+.grab{width:44px;height:5px;background:rgba(255,255,255,.28);border-radius:5px;margin:0 auto 10px}
+
+/* Leaflet en oscuro: filtro sobre los mosaicos (no necesita clave) */
+.leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.92) contrast(.9) saturate(.75)}
+.leaflet-container{background:#15122f;font-family:inherit}
+.leaflet-popup-content-wrapper{background:#1c1840;color:var(--ink);border:1px solid var(--line);border-radius:18px;box-shadow:0 12px 34px rgba(0,0,0,.6)}
+.leaflet-popup-tip{background:#1c1840}
+.leaflet-popup-content{margin:14px 16px;font-size:13.5px;line-height:1.5}
+.leaflet-popup-content a{color:var(--brand3);font-weight:700}
+.leaflet-container a.leaflet-popup-close-button{color:var(--sub)}
+.leaflet-bar a{background:rgba(22,18,52,.9);color:var(--ink);border-bottom:1px solid var(--line)}
+.leaflet-bar{border:1px solid var(--line)!important;border-radius:14px!important;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.45)}
+.leaflet-control-attribution{background:rgba(12,10,29,.7)!important;color:#8c88b0!important;font-size:9px}
+.leaflet-control-attribution a{color:#a9a5c8!important}
+
+/* ---------- Tabla comparar ---------- */
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+td,th{padding:12px 6px;border-bottom:1px solid var(--line);text-align:center}
+tr:last-child td{border-bottom:0}
+td:first-child{text-align:left;color:var(--sub);padding-left:12px}
+th{font-weight:700}
+.best{background:rgba(61,220,151,.14)}
+
+/* ---------- Ficha ---------- */
+.hero{height:230px;position:relative;background-size:cover!important;background-position:center!important}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,10,29,.55) 0%,rgba(12,10,29,0) 38%,rgba(12,10,29,.95) 100%)}
+.hero .volver{position:absolute;top:calc(14px + env(safe-area-inset-top));left:14px;z-index:2;background:rgba(12,10,29,.55);backdrop-filter:blur(10px);
+  color:#fff;padding:8px 14px;border-radius:20px}
+.hoja{position:relative;margin-top:-34px;z-index:2;border-radius:28px 28px 0 0;padding:20px 18px 120px;background:linear-gradient(180deg,rgba(21,18,47,.96),rgba(12,10,29,.98))}
+.promo{background:var(--grad);color:#fff;font-size:13.5px;font-weight:700;padding:11px 16px;border-radius:14px;margin-bottom:14px;box-shadow:0 8px 22px rgba(255,106,74,.35)}
+.thumb{width:48px;height:48px;border-radius:13px;flex:none;background-size:cover;background-position:center}
+
+/* ---------- Panel del dueño (segmentos) ---------- */
+.segmentos{display:flex;gap:6px;padding:5px;background:var(--card);border:1px solid var(--line);border-radius:18px;margin:16px 0 4px}
+.segmentos button{flex:1;border:0;background:none;padding:11px 4px;border-radius:14px;font-size:13px;font-weight:700;color:var(--sub);cursor:pointer;transition:.15s}
+.segmentos button.on{background:var(--grad);color:#fff;box-shadow:0 6px 16px rgba(255,106,74,.4)}
+.seccion{display:none}.seccion.on{display:block}
+.portada{height:150px;border-radius:22px;background-size:cover;background-position:center;position:relative;overflow:hidden;border:1px solid var(--line)}
+.portada::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(12,10,29,.9))}
+.portada .nombre{position:absolute;left:16px;right:16px;bottom:12px;z-index:2;font-size:21px;font-weight:800}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.stats div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 6px;text-align:center}
+.stats b{display:block;font-size:22px;font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stats span{font-size:11px;color:var(--sub)}
+.opciones{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px}
+.opciones label{cursor:pointer}
+.opciones input{display:none}
+.opciones span{display:block;text-align:center;padding:11px 2px;border-radius:13px;background:var(--card);border:1px solid var(--line);font-size:12px;font-weight:700;color:var(--sub);transition:.15s}
+.opciones input:checked+span{background:var(--grad);color:#fff;border-color:transparent;box-shadow:0 6px 16px rgba(255,106,74,.35)}
+.agotado{opacity:.5}
+.acciones-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.acciones-grid a{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 12px;text-align:center;font-weight:700;font-size:13.5px}
+.acciones-grid a b{display:block;font-size:26px;margin-bottom:4px;font-weight:400}
+
+/* ---------- Mensajes ---------- */
+.burbuja{border-radius:16px;padding:12px 14px;font-size:14px;line-height:1.45;margin-top:8px;background:var(--card);border:1px solid var(--line)}
+.burbuja.resp{background:linear-gradient(135deg,rgba(139,107,255,.22),rgba(255,79,154,.12));border-color:rgba(139,107,255,.4)}
+.burbuja small{display:block;color:var(--sub);font-size:11.5px;margin-bottom:3px;font-weight:600}
+.nuevo{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--pink);box-shadow:0 0 10px var(--pink);margin-right:6px}
+
+/* ---------- Acceso (login/registro) ---------- */
+.acceso{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;justify-content:center;padding:26px 22px}
+.acceso .marca{text-align:center;margin-bottom:22px}
+.acceso .marca .icono{width:76px;height:76px;margin:0 auto 12px;border-radius:24px;background:var(--grad);display:grid;place-items:center;font-size:36px;
+  box-shadow:0 14px 40px rgba(255,106,74,.5);transform:rotate(-6deg)}
+.acceso .logo{font-size:34px}
+.acceso .tarjeta{padding:20px 18px;border-radius:26px;background:rgba(255,255,255,.07);backdrop-filter:blur(16px)}
+
+@media (min-width:600px){
+  body{padding:22px 0}
+  .app{border-radius:34px;border:1px solid var(--line);box-shadow:0 30px 80px rgba(0,0,0,.6);background:rgba(12,10,29,.55);min-height:calc(100vh - 44px)}
+  .app.explorar{height:calc(100vh - 44px)!important}
+  .tab{bottom:36px}
+}
+@media (max-width:599px){ .app,.tab{max-width:none} }
