@@ -23,6 +23,9 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-av
 COPY docker/apache.conf /etc/apache2/conf-available/foodmatch.conf
 RUN a2enconf foodmatch
 
+# Apache trae un alias interno /icons/ que tapa nuestra carpeta public/icons (íconos de la app): lo quitamos
+RUN sed -i '/Alias \/icons\//d' /etc/apache2/mods-available/alias.conf
+
 # PHP en modo producción + límite de subida de fotos (3 MB de la app + margen)
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
     && printf "upload_max_filesize=6M\npost_max_size=8M\nexpose_php=Off\n" > "$PHP_INI_DIR/conf.d/foodmatch.ini"

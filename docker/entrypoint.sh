@@ -23,13 +23,25 @@ chown -R www-data:www-data "$DATA" storage bootstrap/cache 2>/dev/null || true
 php artisan storage:link --force >/dev/null 2>&1 || true
 php artisan migrate --force
 
-# Solo la primera vez (o cuando lo pidas con RUN_SEED=1): carga categorías y datos base
-if [ "${RUN_SEED:-0}" = "1" ]; then
-    php artisan db:seed --force || true
+# Con RUN_SEED=1: carga categorías y menús de ejemplo UNA sola vez (deja una marca en la carpeta persistente)
+if [ "${RUN_SEED:-0}" = "1" ] && [ ! -f "$DATA/.seed_ok" ]; then
+    php artisan db:seed --class=FoodMatchSeeder --force \
+      && php artisan db:seed --class=DemoMenusSeeder --force \
+      && touch "$DATA/.seed_ok" || true
+fi
+
+# Con ADMIN_EMAIL=tucorreo: esa cuenta (ya registrada) pasa a ser admin y queda verificada
+if [ -n "${ADMIN_EMAIL:-}" ]; then
+    php artisan tinker --execute="App\\Models\\User::where('email', '${ADMIN_EMAIL}')->update(['es_admin'=>true,'email_verified_at'=>now()]);" || true
 fi
 
 php artisan config:cache
 php artisan route:cache || true
 php artisan view:cache || true
+
+# Con IMPORTAR_OSM=1: trae los restaurantes reales de la zona UNA vez, en segundo plano (no demora el arranque)
+if [ "${IMPORTAR_OSM:-0}" = "1" ] && [ ! -f "$DATA/.osm_ok" ]; then
+    ( php artisan foodmatch:importar-osm --radio=8000 && touch "$DATA/.osm_ok" ) >/proc/1/fd/1 2>&1 &
+fi
 
 exec "$@"
