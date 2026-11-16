@@ -82,6 +82,7 @@
         </div>
 
         <div class="sheet-body" id="sheet-body">
+            <a class="btn" style="margin:2px 0 8px" href="{{ route('comparar', request()->query()) }}">⭐ Comparar y ver el mejor para ti</a>
             @forelse ($cercanos as $r)
                 <a class="rowi" href="{{ route('ficha', array_merge(['restaurante' => $r->id], array_filter(request()->only(['lat', 'lng'])))) }}">
                     @if ($r->imagen)
@@ -109,7 +110,6 @@
                 </div>
             @endforelse
 
-            <a class="btn" style="margin-top:6px" href="{{ route('comparar', request()->query()) }}">⭐ Comparar y ver el mejor para ti</a>
             <div class="fin"></div>
         </div>
     </div>
